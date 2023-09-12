@@ -1,4 +1,4 @@
-local scriptURL = "https://raw.githubusercontent.com/13B8B/nexus/main/modules/" .. game.PlaceId .. ".lua"
+local scriptURL = "https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/" .. game.PlaceId .. ".lua"
 
 if not getgenv().nexus then
     getgenv().nexus = true
@@ -7,7 +7,6 @@ if not getgenv().nexus then
     if scriptContent then
         local success, result = pcall(loadstring(scriptContent))
         if not success then
-            -- If loading the script fails, load a universal script
             loadstring(game:HttpGet('https://raw.githubusercontent.com/13B8B/nexus/main/universal.lua'))()
         end
     end
