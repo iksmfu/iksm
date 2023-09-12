@@ -1,6 +1,3 @@
-if getgenv().nexus then
-	return
-end 
 local L_1_ = game:GetService("HttpService")
 local L_2_ = game:GetService("TeleportService")
 local L_3_ = game:GetService("Players")
@@ -13,7 +10,6 @@ local L_10_ = "FLORENCE/SETTINGS/"..L_9_..'.txt'
 local L_11_ = game:GetService("UserInputService")
 local L_12_ = {} 
 
-getgenv().nexus = true
 getgenv().settings = {}
 
 if isfile("FLORENCE/SETTINGS/"..L_9_..'.txt') then
