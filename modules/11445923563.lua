@@ -1,6 +1,3 @@
-if getgenv().nexus then
-	return
-end 
 local L_1_ = game:GetService("HttpService")
 local L_2_ = game:GetService("TeleportService")
 local L_3_ = game:GetService("Players")
@@ -16,7 +13,7 @@ local L_13_
 local L_14_
 
 getgenv().settings = {}
-getgenv().nexus = true
+
 
 if isfile("FLORENCE/SETTINGS/"..game.PlaceId..'.txt') then
 	local L_70_, L_71_ = pcall(function()
