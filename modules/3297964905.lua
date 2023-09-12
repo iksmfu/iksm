@@ -1,8 +1,3 @@
-if getgenv().nexus then
-	return
-else
-	getgenv().nexus = true
-end 
 repeat
 	wait()
 until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character
