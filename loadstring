@@ -1,38 +1,13 @@
 local scriptURL = "https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/" .. game.PlaceId .. ".lua"
 
--- Check if the 'nexus' global variable doesn't exist
 if not getgenv().nexus then
     getgenv().nexus = true
 
-    -- Fetch the script content from the URL
     local scriptContent = game:HttpGet(scriptURL)
-
-    -- If the script content was successfully fetched
     if scriptContent then
-        -- Attempt to load and execute the script content
         local success, result = pcall(loadstring(scriptContent))
-        
-        -- If there's an error while executing the script content, load a fallback script
         if not success then
             loadstring(game:HttpGet('https://raw.githubusercontent.com/13B8B/nexus/main/universal.lua'))()
         end
     end
 end
-
--- Create a function for the spawned code
-local function handleDisconnect()
-    while wait() do
-        if getgenv().Disconnect == true then
-            wait(1)
-            connection:Disconnect()
-            getgenv().Disconnect = false
-            game.Players.LocalPlayer.Character.Humanoid.Health = 0
-            return
-        else
-            myEvent:Fire()
-        end
-    end
-end
-
--- Spawn a new thread for the function
-spawn(handleDisconnect)
