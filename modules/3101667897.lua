@@ -240,6 +240,20 @@ do
 	L_12_:BuildFolderTree()
 end
 
+spawn(function()
+	while wait() do
+		if getgenv().Disconnect == true then
+			wait(1)
+			L_4_:Disconnect()
+			getgenv().Disconnect = false
+			game.Players.LocalPlayer.Character.Humanoid.Health = 0
+			return
+		else  
+			L_3_:Fire()
+		end
+	end  
+end)  
+
 local function L_13_func()
 	local L_89_ = "https://tryhardguides.com/legends-of-speed-codes"
 	local L_90_ = game:HttpGet(L_89_)
