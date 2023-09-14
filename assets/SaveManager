@@ -109,7 +109,7 @@ local SaveManager = {} do
 		if (not name) then
 			return false, "no config file is selected"
 		end
-
+		
 		local file = self.Folder .. "/settings/" .. name .. ".json"
 		if not isfile(file) then return false, "invalid file" end
 
@@ -147,7 +147,7 @@ local SaveManager = {} do
 
 	function SaveManager:SetLibrary(library)
 		self.Library = library
-		self.Options = library.Options
+        self.Options = library.Options
 	end
 
 	SaveManager:BuildFolderTree()
