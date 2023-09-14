@@ -63,7 +63,6 @@ local InterfaceManager = {} do
 		InterfaceManager:LoadSettings()
 
 		local section = tab:AddSection("Interface")
-		local sectiomn = tab:AddSection("premium")
 
 		local InterfaceTheme = section:AddDropdown("InterfaceTheme", {
 			Title = "Theme",
