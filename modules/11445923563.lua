@@ -31,6 +31,7 @@ spawn(function()
        if getgenv().Disconnect == true then wait(1)
            connection:Disconnect()
 		    getgenv().Disconnect = false
+                    getgenv().nexus = false
             return
 		else  
 			BindableEvent:Fire()  
