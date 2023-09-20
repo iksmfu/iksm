@@ -79,6 +79,7 @@ spawn(function()
 		if getgenv().Disconnect == true then
 			wait(1)
 			L_26_:Disconnect()
+                        getgenv().nexus = false
 			getgenv().Disconnect = false
 			return
 		else  
