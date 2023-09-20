@@ -135,7 +135,7 @@ spawn(function()
        if getgenv().Disconnect == true then wait(1)
            connection:Disconnect()
 		    getgenv().Disconnect = false
-			game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                    getgenv().nexus = false
 			return
 		else  
 			BindableEvent:Fire()
