@@ -18,14 +18,14 @@ local L_11_ = L_3_.LocalPlayer
 local L_12_ = {}
 
 local function L_13_func()
-	for L_47_forvar1, L_48_forvar2 in pairs(workspace:GetChildren()) do
-		if L_48_forvar2:FindFirstChild("CoinContainer") then
-			return L_48_forvar2.CoinContainer
-		elseif L_48_forvar2:FindFirstChild("Map") then
+	for L_50_forvar1, L_51_forvar2 in pairs(workspace:GetChildren()) do
+		if L_51_forvar2:FindFirstChild("CoinContainer") then
+			return L_51_forvar2.CoinContainer
+		elseif L_51_forvar2:FindFirstChild("Map") then
 			if pcall(function()
-				local L_49_ = L_48_forvar2.Map.CoinContainer
+				local L_52_ = L_51_forvar2.Map.CoinContainer
 			end) then
-				return L_48_forvar2.Map.CoinContainer
+				return L_51_forvar2.Map.CoinContainer
 			end
 		end
 	end
@@ -38,7 +38,6 @@ spawn(function()
 			wait(1)
 			L_8_:Disconnect()
 			getgenv().Disconnect = false
-			--game.Players.LocalPlayer.Character.Humanoid.Health = 0
 			return
 		else  
 			L_7_:Fire()  
@@ -74,7 +73,11 @@ local L_19_ = {
 	}),
 	Misc = L_18_:AddTab({
 		Title = "Misc",
-		Icon = "rbxassetid://10709818534"
+		Icon = "rbxassetid://10709770431"
+	}),
+	Trap = L_18_:AddTab({
+		Title = "Trap",
+		Icon = "rbxassetid://10723396107"
 	}),
 	Player = L_18_:AddTab({
 		Title = "Player",
@@ -84,6 +87,10 @@ local L_19_ = {
 		Title = "Emotes",
 		Icon = "rbxassetid://4335480896"
 	}),
+	Premium = premium == "premium" and L_18_:AddTab({
+		Title = "Premium",
+		Icon = "rbxassetid://10709819149"
+	}),
 	Server = L_18_:AddTab({
 		Title = "Server",
 		Icon = "rbxassetid://10734949856"
@@ -92,80 +99,75 @@ local L_19_ = {
 		Title = "Settings",
 		Icon = "settings"
 	}),
-	Premium = premium == "premium" and L_18_:AddTab({
-		Title = "Premium",
-		Icon = "rbxassetid://10709819149"
-	}),
-
 }
 
 local L_20_ = L_19_.Main:AddToggle("AutoFarm", {
 	Title = "Auto Farm",
 	Default = false,
-	Callback = function(L_50_arg1)
-		if L_50_arg1 then 
+	Callback = function(L_53_arg1)
+		if L_53_arg1 then 
 			repeat
-				local L_51_, L_52_ = pcall(function() 
+				local L_54_, L_55_ = pcall(function() 
 
 					task.wait()
-					local L_53_ = L_13_func()
-					if L_53_ then
+					local L_56_ = L_13_func()
+					if L_56_ then
 
-						local function L_54_func(L_55_arg1)
-							local L_56_ = game.Players.LocalPlayer
-							local L_57_ = L_56_.Character
-							local L_58_ = L_57_ and L_57_:FindFirstChild("HumanoidRootPart")
+						local function L_57_func(L_58_arg1)
+							local L_59_ = game.Players.LocalPlayer
+							local L_60_ = L_59_.Character
+							local L_61_ = L_60_ and L_60_:FindFirstChild("HumanoidRootPart")
 
-							if L_58_ then
+							if L_61_ then
 
-								local L_59_ = (L_58_.Position - L_55_arg1.p).Magnitude
-								local L_60_ = TweenInfo.new(L_59_ / 70, Enum.EasingStyle.Linear, Enum.EasingDirection.In)
+								local L_62_ = (L_61_.Position - L_58_arg1.p).Magnitude
+								local L_63_ = TweenInfo.new(L_62_ / 70, Enum.EasingStyle.Linear, Enum.EasingDirection.In)
 
-								local L_61_ = game:GetService("TweenService"):Create(L_58_, L_60_, {
-									CFrame = L_55_arg1
+								local L_64_ = game:GetService("TweenService"):Create(L_61_, L_63_, {
+									CFrame = L_58_arg1
 								})
-								L_61_:Play()
-								L_61_.Completed:Wait()
+								L_64_:Play()
+								L_64_.Completed:Wait()
 
 							end
 						end
 
-						if L_53_ and game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.Timer.Visible == true or game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.CashBag.Visible == true then 
+						if L_56_ and game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.Timer.Visible == true or game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.CashBag.Visible == true then 
 
-							local L_62_ = math.huge
-							local L_63_ = nil
+							local L_65_ = math.huge
+							local L_66_ = nil
 
-							local L_64_ = game.Players.LocalPlayer
-							local L_65_ = L_64_.Character
-							local L_66_ = L_65_ and L_65_:FindFirstChild("HumanoidRootPart")
+							local L_67_ = game.Players.LocalPlayer
+							local L_68_ = L_67_.Character
+							local L_69_ = L_68_ and L_68_:FindFirstChild("HumanoidRootPart")
 
-							local L_67_ = L_66_.Position
+							local L_70_ = L_69_.Position
 
-							for L_68_forvar1, L_69_forvar2 in pairs(L_53_:GetChildren()) do
-								if L_69_forvar2.Name == 'Coin_Server' then
-									local L_70_ = L_69_forvar2.Coin.Position
-									local L_71_ = (L_67_ - L_70_).Magnitude
+							for L_71_forvar1, L_72_forvar2 in pairs(L_56_:GetChildren()) do
+								if L_72_forvar2.Name == 'Coin_Server' then
+									local L_73_ = L_72_forvar2.Coin.Position
+									local L_74_ = (L_70_ - L_73_).Magnitude
 
-									if L_71_ < L_62_ then
-										L_62_ = L_71_
-										L_63_ = L_69_forvar2
+									if L_74_ < L_65_ then
+										L_65_ = L_74_
+										L_66_ = L_72_forvar2
 									end
 								end
 							end
 
-							if L_63_ then
-								L_54_func(CFrame.new(L_63_.Coin.CFrame.p))
+							if L_66_ then
+								L_57_func(CFrame.new(L_66_.Coin.CFrame.p))
 
-								for L_72_forvar1 = 0, 10, 1 do
-									L_65_:SetPrimaryPartCFrame(L_65_.PrimaryPart.CFrame * CFrame.Angles(0, math.rad(L_72_forvar1), 0))
+								for L_75_forvar1 = 0, 10, 1 do
+									L_68_:SetPrimaryPartCFrame(L_68_.PrimaryPart.CFrame * CFrame.Angles(0, math.rad(L_75_forvar1), 0))
 									wait(0.02)
 								end
 
-								L_63_.Name = 'False_Coin'
+								L_66_.Name = 'False_Coin'
 
 								repeat
 									wait()
-								until L_63_.Name ~= 'Coin_Server'
+								until L_66_.Name ~= 'Coin_Server'
 								wait(1)
 							end
 						end
@@ -179,36 +181,36 @@ local L_20_ = L_19_.Main:AddToggle("AutoFarm", {
 local L_21_ = L_19_.Main:AddToggle("XRay", {
 	Title = "X-RAY",
 	Default = false,
-	Callback = function(L_73_arg1)
-		module:xray(L_73_arg1)
+	Callback = function(L_76_arg1)
+		module:xray(L_76_arg1)
 	end
 })
 
 local L_22_ = L_19_.Main:AddToggle("CoinChams", {
 	Title = "Coin Chams",
 	Default = false,
-	Callback = function(L_74_arg1)
-		if L_74_arg1 then 
+	Callback = function(L_77_arg1)
+		if L_77_arg1 then 
 			repeat
 				task.wait()
-				local L_75_ = L_13_func()
-				if L_75_ then
-					for L_76_forvar1, L_77_forvar2 in pairs(L_75_:GetChildren()) do
-						if L_77_forvar2.Name == 'Coin_Server' and not L_12_[L_77_forvar2] then
-							local L_78_ = Instance.new("Highlight")
-							L_78_.Name = "EspPareet"
-							L_78_.FillTransparency = 0.5
-							L_78_.FillColor = Color3.new(94 / 255, 1, 255 / 255)
-							L_78_.OutlineColor = Color3.new(94 / 255, 1, 255 / 255)
-							L_78_.OutlineTransparency = 0
-							L_78_.Parent = L_77_forvar2.Parent
-							L_12_[L_77_forvar2] = L_78_  
+				local L_78_ = L_13_func()
+				if L_78_ then
+					for L_79_forvar1, L_80_forvar2 in pairs(L_78_:GetChildren()) do
+						if L_80_forvar2.Name == 'Coin_Server' and not L_12_[L_80_forvar2] then
+							local L_81_ = Instance.new("Highlight")
+							L_81_.Name = "EspPareet"
+							L_81_.FillTransparency = 0.5
+							L_81_.FillColor = Color3.new(94 / 255, 1, 255 / 255)
+							L_81_.OutlineColor = Color3.new(94 / 255, 1, 255 / 255)
+							L_81_.OutlineTransparency = 0
+							L_81_.Parent = L_80_forvar2.Parent
+							L_12_[L_80_forvar2] = L_81_  
 						end
 					end
 				end 
 			until not L_17_.CoinChams.Value or not L_8_.Connected
-			for L_79_forvar1, L_80_forvar2 in pairs(L_12_) do
-				L_80_forvar2:Destroy()
+			for L_82_forvar1, L_83_forvar2 in pairs(L_12_) do
+				L_83_forvar2:Destroy()
 			end         
 		end
 	end
@@ -217,67 +219,66 @@ local L_22_ = L_19_.Main:AddToggle("CoinChams", {
 local L_23_ = L_19_.Main:AddToggle("PlayerESP", {
 	Title = "Player Chams",
 	Default = false,
-	Callback = function(L_81_arg1)
-
+	Callback = function(L_84_arg1)
 	end
 })  
 
 spawn(function()
 	while wait() do
 		if not L_17_.PlayerESP.Value then
-			for L_82_forvar1, L_83_forvar2 in next, game:GetService('Players'):GetPlayers() do
-				if L_83_forvar2.Name ~= game:GetService('Players').LocalPlayer.Name then
+			for L_85_forvar1, L_86_forvar2 in next, game:GetService('Players'):GetPlayers() do
+				if L_86_forvar2.Name ~= game:GetService('Players').LocalPlayer.Name then
 					pcall(function()
-						L_83_forvar2.Character.Highlight:Destroy()
+						L_86_forvar2.Character.Highlight:Destroy()
 					end)
 				end 
 			end
 		else
-			local L_84_ = game:GetService("ReplicatedStorage")
-			local L_85_ = L_84_:FindFirstChild("GetPlayerData", true):InvokeServer()
+			local L_87_ = game:GetService("ReplicatedStorage")
+			local L_88_ = L_87_:FindFirstChild("GetPlayerData", true):InvokeServer()
 
 			function CreateHighlight()
-				for L_86_forvar1, L_87_forvar2 in pairs(L_3_:GetChildren()) do
-					if L_87_forvar2 ~= L_11_ and L_87_forvar2.Character and not L_87_forvar2.Character:FindFirstChild("Highlight") then
-						Instance.new("Highlight", L_87_forvar2.Character)
+				for L_89_forvar1, L_90_forvar2 in pairs(L_3_:GetChildren()) do
+					if L_90_forvar2 ~= L_11_ and L_90_forvar2.Character and not L_90_forvar2.Character:FindFirstChild("Highlight") then
+						Instance.new("Highlight", L_90_forvar2.Character)
 					end
 				end
 			end
 
 			function UpdateHighlights() 
-				for L_88_forvar1, L_89_forvar2 in pairs(L_3_:GetChildren()) do
-					local L_90_ = L_89_forvar2.Character and L_89_forvar2.Character:FindFirstChild("Highlight")
-					if L_89_forvar2 ~= L_11_ and L_90_ then
-						if IsAlive(L_89_forvar2) then
-							if L_89_forvar2.Name == Sheriff then 		
-								L_90_.FillColor = Color3.fromRGB(0, 0, 225)
-							elseif L_89_forvar2.Name == Murder then 
-								L_90_.FillColor = Color3.fromRGB(225, 0, 0) 
-							elseif L_89_forvar2.Name == Hero and not IsAlive(L_3_:WaitForChild(Sheriff)) then
-								L_90_.FillColor = Color3.fromRGB(0, 0, 225)
+				for L_91_forvar1, L_92_forvar2 in pairs(L_3_:GetChildren()) do
+					local L_93_ = L_92_forvar2.Character and L_92_forvar2.Character:FindFirstChild("Highlight")
+					if L_92_forvar2 ~= L_11_ and L_93_ then
+						if IsAlive(L_92_forvar2) then
+							if L_92_forvar2.Name == Sheriff then 		
+								L_93_.FillColor = Color3.fromRGB(0, 0, 225)
+							elseif L_92_forvar2.Name == Murder then 
+								L_93_.FillColor = Color3.fromRGB(225, 0, 0) 
+							elseif L_92_forvar2.Name == Hero and not IsAlive(L_3_:WaitForChild(Sheriff)) then
+								L_93_.FillColor = Color3.fromRGB(0, 0, 225)
 							else 
-								L_90_.FillColor = Color3.fromRGB(76, 215, 134) 
+								L_93_.FillColor = Color3.fromRGB(76, 215, 134) 
 							end
 						else
-							L_90_.FillColor = Color3.fromRGB(255, 255, 255)
+							L_93_.FillColor = Color3.fromRGB(255, 255, 255)
 						end
 					end
 				end
 			end
 
-			function IsAlive(L_91_arg1)
-				local L_92_ = L_85_[L_91_arg1.Name]
-				return L_92_ and not L_92_.Killed and not L_92_.Dead
+			function IsAlive(L_94_arg1)
+				local L_95_ = L_88_[L_94_arg1.Name]
+				return L_95_ and not L_95_.Killed and not L_95_.Dead
 			end  
 
 			Sheriff, Murder, Hero = nil, nil, nil
-			for L_93_forvar1, L_94_forvar2 in pairs(L_85_) do
-				if L_94_forvar2.Role == "Murderer" then
-					Murder = L_93_forvar1
-				elseif L_94_forvar2.Role == 'Sheriff' then
-					Sheriff = L_93_forvar1
-				elseif L_94_forvar2.Role == 'Hero' then
-					Hero = L_93_forvar1
+			for L_96_forvar1, L_97_forvar2 in pairs(L_88_) do
+				if L_97_forvar2.Role == "Murderer" then
+					Murder = L_96_forvar1
+				elseif L_97_forvar2.Role == 'Sheriff' then
+					Sheriff = L_96_forvar1
+				elseif L_97_forvar2.Role == 'Hero' then
+					Hero = L_96_forvar1
 				end
 			end  
 			if L_17_.PlayerESP.Value then 
@@ -285,10 +286,10 @@ spawn(function()
 				UpdateHighlights()
 			end
 			if not L_8_.Connected then 
-				for L_95_forvar1, L_96_forvar2 in next, game:GetService('Players'):GetPlayers() do
-					if L_96_forvar2.Name ~= game:GetService('Players').LocalPlayer.Name then
+				for L_98_forvar1, L_99_forvar2 in next, game:GetService('Players'):GetPlayers() do
+					if L_99_forvar2.Name ~= game:GetService('Players').LocalPlayer.Name then
 						pcall(function()
-							L_96_forvar2.Character.Highlight:Destroy()
+							L_99_forvar2.Character.Highlight:Destroy()
 						end)
 					end 
 				end
@@ -301,41 +302,40 @@ end)
 local L_24_ = L_19_.Main:AddToggle("GrabGun", {
 	Title = "Automatically Grab Gun",
 	Default = false,
-	Callback = function(L_97_arg1)
-		if L_97_arg1 then 
+	Callback = function(L_100_arg1)
+		if L_100_arg1 then 
 			repeat
 				task.wait()
-				local L_98_, L_99_ = pcall(function() 
+				local L_101_, L_102_ = pcall(function() 
 
-					local L_100_ = L_3_.LocalPlayer
-					local L_101_ = L_100_.Character
-					local L_102_ = L_101_:FindFirstChild("HumanoidRootPart")
+					local L_103_ = L_3_.LocalPlayer
+					local L_104_ = L_103_.Character
+					local L_105_ = L_104_:FindFirstChild("HumanoidRootPart")
 
-					local L_103_ = GetMurderer()
-					local L_104_ = game:GetService("Workspace"):FindFirstChild("GunDrop")
-					local L_105_ = game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.CashBag.Visible == true
+					local L_106_ = GetMurderer()
+					local L_107_ = game:GetService("Workspace"):FindFirstChild("GunDrop")
+					local L_108_ = game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.CashBag.Visible == true
 
-					if L_104_ and L_105_ then
+					if L_107_ and L_108_ then
+						local L_109_ = workspace:FindFirstChild(L_106_)
 
-						local L_106_ = workspace:FindFirstChild(L_103_)
+						if L_109_ then
+							local L_110_ = L_109_:WaitForChild("HumanoidRootPart")
+							print(L_110_.Position)
+							local L_111_ = L_107_.Position
 
-						if L_106_ then
-							local L_107_ = L_106_:WaitForChild("HumanoidRootPart")
-							print(L_107_.Position)
-							local L_108_ = L_104_.Position
+							local L_112_ = (L_110_.Position - L_111_).Magnitude
+							local L_113_ = game.Players.LocalPlayer
 
-							local L_109_ = (L_107_.Position - L_108_).Magnitude
-							local L_110_ = game.Players.LocalPlayer
-
-							if L_109_ > 25 then
+							if L_112_ > 25 then
 
 								if game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.Timer.Visible == false then 
-									local L_111_ = L_110_.Character.HumanoidRootPart.CFrame
+									local L_114_ = L_113_.Character.HumanoidRootPart.CFrame
 									wait(.5)
-									L_110_.Character.HumanoidRootPart.CFrame = L_104_.CFrame
-									L_110_.Character.Humanoid.Jump = true
+									L_113_.Character.HumanoidRootPart.CFrame = L_107_.CFrame
+									L_113_.Character.Humanoid.Jump = true
 									wait(.3)
-									L_110_.Character.HumanoidRootPart.CFrame = L_111_
+									L_113_.Character.HumanoidRootPart.CFrame = L_114_
 								end  
 							end
 
@@ -343,8 +343,8 @@ local L_24_ = L_19_.Main:AddToggle("GrabGun", {
 					end
 				end)
 
-				if not L_98_ then
-					warn("An error occurred:", L_99_) -- Print the error message
+				if not L_101_ then
+					warn("An error occurred:", L_102_) -- Print the error message
 				end
 
 			until not L_17_.GrabGun.Value or not L_8_.Connected
@@ -356,31 +356,31 @@ local L_24_ = L_19_.Main:AddToggle("GrabGun", {
 local L_25_ = L_19_.Main:AddToggle("GunCham", {
 	Title = "Gun Dropped Cham",
 	Default = false,
-	Callback = function(L_112_arg1)
-		if L_112_arg1 then 
-			local L_113_ = game:GetService("Workspace"):FindFirstChild("GunDrop")
-			local L_114_
+	Callback = function(L_115_arg1)
+		if L_115_arg1 then 
+			local L_116_ = game:GetService("Workspace"):FindFirstChild("GunDrop")
+			local L_117_
 
 			repeat
 				task.wait()
-				local L_115_ = game:GetService("Workspace"):FindFirstChild("GunDrop")
+				local L_118_ = game:GetService("Workspace"):FindFirstChild("GunDrop")
 
-				if L_115_ then
-					L_114_ = L_115_:FindFirstChild("GunESP")
-					if not L_114_ then
-						L_114_ = Instance.new("Highlight")
-						L_114_.Name = "GunESP"
-						L_114_.FillTransparency = 0.5
-						L_114_.FillColor = Color3.new(94, 1, 255)
-						L_114_.OutlineColor = Color3.new(94, 1, 255)
-						L_114_.OutlineTransparency = 0
-						L_114_.Parent = L_115_
+				if L_118_ then
+					L_117_ = L_118_:FindFirstChild("GunESP")
+					if not L_117_ then
+						L_117_ = Instance.new("Highlight")
+						L_117_.Name = "GunESP"
+						L_117_.FillTransparency = 0.5
+						L_117_.FillColor = Color3.new(94, 1, 255)
+						L_117_.OutlineColor = Color3.new(94, 1, 255)
+						L_117_.OutlineTransparency = 0
+						L_117_.Parent = L_118_
 					end
 				end
 			until not L_17_.GunCham.Value or not L_8_.Connected
 
-			if L_114_ then 
-				L_114_:Destroy() 
+			if L_117_ then 
+				L_117_:Destroy() 
 			end
 		end
 	end
@@ -389,23 +389,23 @@ local L_25_ = L_19_.Main:AddToggle("GunCham", {
 local L_26_ = L_19_.Misc:AddToggle("KillAll", {
 	Title = "Kill Aura",
 	Default = false,
-	Callback = function(L_116_arg1)
-		if L_116_arg1 then 
+	Callback = function(L_119_arg1)
+		if L_119_arg1 then 
 			repeat
 				task.wait()
-				local L_117_, L_118_ = pcall(function() 
+				local L_120_, L_121_ = pcall(function() 
 
-					local L_119_ = L_11_.Backpack:FindFirstChild("Knife") or L_11_.Character:FindFirstChild("Knife")
-					local L_120_ = tonumber(L_17_.Distance.Value)
+					local L_122_ = L_11_.Backpack:FindFirstChild("Knife") or L_11_.Character:FindFirstChild("Knife")
+					local L_123_ = tonumber(L_17_.Distance.Value)
 
-					for L_121_forvar1, L_122_forvar2 in ipairs(L_3_:GetPlayers()) do
-						if L_122_forvar2 ~= L_11_ and L_122_forvar2.Character ~= nil then
-							local L_123_ = L_122_forvar2.Character.HumanoidRootPart
-							local L_124_ = L_123_.Position
-							local L_125_ = (L_124_ - L_11_.Character.HumanoidRootPart.Position).Magnitude
-							if (L_125_ <= L_120_) then
-								firetouchinterest(L_123_, L_119_.Handle, 1)
-								firetouchinterest(L_123_, L_119_.Handle, 0)
+					for L_124_forvar1, L_125_forvar2 in ipairs(L_3_:GetPlayers()) do
+						if L_125_forvar2 ~= L_11_ and L_125_forvar2.Character ~= nil then
+							local L_126_ = L_125_forvar2.Character.HumanoidRootPart
+							local L_127_ = L_126_.Position
+							local L_128_ = (L_127_ - L_11_.Character.HumanoidRootPart.Position).Magnitude
+							if (L_128_ <= L_123_) then
+								firetouchinterest(L_126_, L_122_.Handle, 1)
+								firetouchinterest(L_126_, L_122_.Handle, 0)
 							end
 						end  
 					end
@@ -421,14 +421,14 @@ local L_27_ = L_19_.Misc:AddSlider("Distance", {
 	Min = 5,
 	Max = 50,
 	Rounding = 0,
-	Callback = function(L_126_arg1)
+	Callback = function(L_129_arg1)
 	end
 })
 
 local L_28_ = L_19_.Misc:AddToggle("SilentAim", {
 	Title = "Silent Aim",
 	Default = false,
-	Callback = function(L_127_arg1)
+	Callback = function(L_130_arg1)
 	end
 })
 
@@ -438,79 +438,79 @@ local L_29_ = L_19_.Misc:AddSlider("Slider", {
 	Min = 25,
 	Max = 100,
 	Rounding = 0,
-	Callback = function(L_128_arg1)
+	Callback = function(L_131_arg1)
 	end
 })  
 
 local L_30_ = L_19_.Misc:AddToggle("KillMurder", {
 	Title = "Kill Murder",
 	Default = false,
-	Callback = function(L_129_arg1)
-		if L_129_arg1 then
+	Callback = function(L_132_arg1)
+		if L_132_arg1 then
 			repeat
-				local L_130_, L_131_ = pcall(function() 
+				local L_133_, L_134_ = pcall(function() 
 					task.wait()
-					local L_132_ = GetMurderer()
-					local L_133_ = game.Players.LocalPlayer
-					local L_134_ = L_133_.Backpack:FindFirstChild("Gun") or L_133_.Character:FindFirstChild("Gun")
-					if not L_134_ then 
+					local L_135_ = GetMurderer()
+					local L_136_ = game.Players.LocalPlayer
+					local L_137_ = L_136_.Backpack:FindFirstChild("Gun") or L_136_.Character:FindFirstChild("Gun")
+					if not L_137_ then 
 						game:GetService('Players').LocalPlayer.CameraMode = Enum.CameraMode.Classic
 					end
-					if L_132_ ~= L_133_.Name and L_133_ then
-						local L_135_ = L_133_.Backpack:FindFirstChild("Gun") or L_133_.Character:FindFirstChild("Gun")
+					if L_135_ ~= L_136_.Name and L_136_ then
+						local L_138_ = L_136_.Backpack:FindFirstChild("Gun") or L_136_.Character:FindFirstChild("Gun")
 
-						if L_135_ then 
-							local L_136_ = L_11_.Character:WaitForChild("Humanoid")
-							L_136_:EquipTool(L_135_)
+						if L_138_ then 
+							local L_139_ = L_11_.Character:WaitForChild("Humanoid")
+							L_139_:EquipTool(L_138_)
 							game:GetService('Players').LocalPlayer.CameraMode = Enum.CameraMode.LockFirstPerson
 
 						end
 
-						if L_135_ and L_133_ and L_132_ then
-							if workspace[L_133_.Name].Gun.Handle.Reload.IsPlaying then 
-								local L_138_ = L_133_.Character:FindFirstChild("HumanoidRootPart")
+						if L_138_ and L_136_ and L_135_ then
+							if workspace[L_136_.Name].Gun.Handle.Reload.IsPlaying then 
+								local L_141_ = L_136_.Character:FindFirstChild("HumanoidRootPart")
 
-								local L_139_ = Vector3.new(-110, 135, 38.946128845215)
-								L_138_.CFrame = CFrame.new(L_139_)
+								local L_142_ = Vector3.new(-110, 135, 38.946128845215)
+								L_141_.CFrame = CFrame.new(L_142_)
 								repeat
 									task.wait()
-								until not workspace[L_133_.Name].Gun.Handle.Reload.IsPlaying
+								until not workspace[L_136_.Name].Gun.Handle.Reload.IsPlaying
 							end
 
 
-							local L_137_ = workspace:FindFirstChild(L_132_)
-							if L_137_ and L_133_ then
-								local L_140_ = L_137_:FindFirstChild("HumanoidRootPart")
-								local L_141_ = L_133_.Character
-								local L_142_ = L_141_:FindFirstChild("HumanoidRootPart")
+							local L_140_ = workspace:FindFirstChild(L_135_)
+							if L_140_ and L_136_ then
+								local L_143_ = L_140_:FindFirstChild("HumanoidRootPart")
+								local L_144_ = L_136_.Character
+								local L_145_ = L_144_:FindFirstChild("HumanoidRootPart")
 
-								if L_140_ and L_142_ and L_133_ and L_132_ then
+								if L_143_ and L_145_ and L_136_ and L_135_ then
 									-- Calculate the position behind the Murderer
-									local L_143_ = Vector3.new(0, 0, 6)
-									local L_144_ = L_140_.CFrame:PointToWorldSpace(L_143_)
+									local L_146_ = Vector3.new(0, 0, 6)
+									local L_147_ = L_143_.CFrame:PointToWorldSpace(L_146_)
 
 									-- Teleport the player's character to the target position
-									L_141_:SetPrimaryPartCFrame(CFrame.new(L_144_))
+									L_144_:SetPrimaryPartCFrame(CFrame.new(L_147_))
 
 									-- Make the character face the Murderer
-									if L_132_ then 
-										L_141_:SetPrimaryPartCFrame(CFrame.new(L_144_, L_140_.Position))
-										local L_145_ = workspace.CurrentCamera
-										L_145_.CFrame = CFrame.new(L_145_.CFrame.Position, (L_140_.Position - Vector3.new(-0.5, 0, 1)))
+									if L_135_ then 
+										L_144_:SetPrimaryPartCFrame(CFrame.new(L_147_, L_143_.Position))
+										local L_148_ = workspace.CurrentCamera
+										L_148_.CFrame = CFrame.new(L_148_.CFrame.Position, (L_143_.Position - Vector3.new(-0.5, 0, 1)))
 									end  
 
 									-- Simulate a click to attack the Murderer
 									spawn(function()
 										wait(0.3)
 
-										local L_146_ = game:GetService("Workspace").CurrentCamera.ViewportSize.X
-										local L_147_ = game:GetService("Workspace").CurrentCamera.ViewportSize.Y
+										local L_149_ = game:GetService("Workspace").CurrentCamera.ViewportSize.X
+										local L_150_ = game:GetService("Workspace").CurrentCamera.ViewportSize.Y
 
-										local L_148_ = L_146_ / 2
-										local L_149_ = L_147_ / 2
+										local L_151_ = L_149_ / 2
+										local L_152_ = L_150_ / 2
 
-										game:GetService("VirtualInputManager"):SendMouseButtonEvent(L_148_, L_149_, 0, true, game, 1)
-										game:GetService("VirtualInputManager"):SendMouseButtonEvent(L_148_, L_149_, 0, false, game, 1)
+										game:GetService("VirtualInputManager"):SendMouseButtonEvent(L_151_, L_152_, 0, true, game, 1)
+										game:GetService("VirtualInputManager"):SendMouseButtonEvent(L_151_, L_152_, 0, false, game, 1)
 									end)  
 								end
 							end
@@ -525,23 +525,23 @@ local L_30_ = L_19_.Misc:AddToggle("KillMurder", {
 L_19_.Misc:AddButton({
 	Title = "Kill All",
 	Callback = function()
-		local L_150_ = L_11_.Backpack:FindFirstChild("Knife") or L_11_.Character:FindFirstChild("Knife")
-		if L_150_ and L_150_:IsA("Tool") then
-			local L_151_ = L_11_.Character
-			local L_152_ = L_151_:WaitForChild("Humanoid")
-			L_152_:EquipTool(L_150_)
+		local L_153_ = L_11_.Backpack:FindFirstChild("Knife") or L_11_.Character:FindFirstChild("Knife")
+		if L_153_ and L_153_:IsA("Tool") then
+			local L_154_ = L_11_.Character
+			local L_155_ = L_154_:WaitForChild("Humanoid")
+			L_155_:EquipTool(L_153_)
 
-			for L_153_forvar1 = 1, 3 do
-				for L_154_forvar1, L_155_forvar2 in ipairs(L_3_:GetPlayers()) do
-					if L_155_forvar2 ~= L_11_ and L_155_forvar2.Character then
-						local L_156_ = L_155_forvar2.Character:WaitForChild("HumanoidRootPart")
-						local L_157_ = L_156_.Position
+			for L_156_forvar1 = 1, 3 do
+				for L_157_forvar1, L_158_forvar2 in ipairs(L_3_:GetPlayers()) do
+					if L_158_forvar2 ~= L_11_ and L_158_forvar2.Character then
+						local L_159_ = L_158_forvar2.Character:WaitForChild("HumanoidRootPart")
+						local L_160_ = L_159_.Position
 
 						L_9_:ClickButton1(Vector2.new())
 
-						firetouchinterest(L_156_, L_150_.Handle, 1)
+						firetouchinterest(L_159_, L_153_.Handle, 1)
 						wait(0.1)
-						firetouchinterest(L_156_, L_150_.Handle, 0)
+						firetouchinterest(L_159_, L_153_.Handle, 0)
 					end
 				end
 			end
@@ -549,81 +549,211 @@ L_19_.Misc:AddButton({
 	end
 })
 
-local function L_31_func(L_158_arg1)
-	local L_159_ = L_10_.Character and L_10_.Character:FindFirstChild("Humanoid")
-	if L_159_ then
-		L_159_.WalkSpeed = L_158_arg1
-	end
-end
-
-local L_32_ = L_19_.Player:AddToggle("WalkSpeed", {
-	Title = "Walkspeed",
+local L_31_ = L_19_.Trap:AddToggle("TrapTrail", {
+	Title = "Trap Trail",
 	Default = false,
-	Callback = function(L_160_arg1)
-		if L_160_arg1 then 
+	Callback = function(L_161_arg1)
+		if L_161_arg1 then
+			local L_162_ = game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.Inventory.Main.Perks.Items.Container.Current.Container
+			local L_163_ = true
+			if L_162_ then
+				for L_164_forvar1, L_165_forvar2 in pairs(L_162_:GetChildren()) do
+					if L_165_forvar2:IsA("Frame") and L_165_forvar2.ItemName.Label.Text == "Trap" then
+						print(L_165_forvar2.ItemName.Label.Text)
+						L_163_ = false 
+					end
+				end
+			end
+			if L_163_ then 
+				L_14_:Notify({
+					Title = 'Missing Trap',
+					Content = 'Must own trap \n400 diamonds or 3K coins',
+					Duration = 5
+				})
+				L_163_ = true 
+			end 
 			repeat
-				task.wait()  
-				L_31_func(L_17_.Walk.Value)  
-			until not L_17_.WalkSpeed.Value or not L_8_.Connected
-			L_31_func(16)
+				task.wait()
+				local L_166_, L_167_ = pcall(function()
+					local L_168_ = game.Players.LocalPlayer
+					if L_168_ then
+						local L_169_ = L_168_.Character and L_168_.Character:FindFirstChild("HumanoidRootPart")
+						if L_169_ then
+							local L_170_ = CFrame.new(L_169_.Position)
+							local L_171_ = game:GetService("ReplicatedStorage")
+							local L_172_ = L_171_:FindFirstChild("TrapSystem")
+							if L_172_ and L_172_:FindFirstChild("PlaceTrap") then
+								L_172_.PlaceTrap:InvokeServer(L_170_)
+							end
+						end
+					end
+				end)
+				if not L_166_ then
+					warn("An error occurred:", L_167_) -- Print the error message
+				end
+			until not L_17_.TrapTrail.Value or not L_8_.Connected
 		end
 	end
 })
 
-local L_33_ = L_19_.Player:AddSlider("Walk", {
+local L_32_ = L_19_.Trap:AddToggle("AutoTrap", {
+	Title = "Trap All",
+	Default = false,
+	Callback = function(L_173_arg1)
+		if L_173_arg1 then
+			local L_174_ = game:GetService("Players").LocalPlayer.PlayerGui.MainGUI.Game.Inventory.Main.Perks.Items.Container.Current.Container
+			local L_175_ = true
+			if L_174_ then
+				for L_176_forvar1, L_177_forvar2 in pairs(L_174_:GetChildren()) do
+					if L_177_forvar2:IsA("Frame") and L_177_forvar2.ItemName.Label.Text == "Trap" then
+						print(L_177_forvar2.ItemName.Label.Text)
+						L_175_ = false 
+					end
+				end
+			end
+			if L_175_ then 
+				L_14_:Notify({
+					Title = 'Missing Trap',
+					Content = 'Must own trap \n400 diamonds or 3K coins',
+					Duration = 5
+				})
+				L_175_ = true 
+			end 
+			repeat
+				task.wait()
+				local L_178_, L_179_ = pcall(function()
+					local L_180_ = game:GetService("ReplicatedStorage")
+					local L_181_ = L_180_:FindFirstChild("TrapSystem")
+
+					if L_181_ and L_181_:FindFirstChild("PlaceTrap") then
+						local L_182_ = game.Players.LocalPlayer
+						local L_183_ = game.Players:GetPlayers()
+
+						for L_184_forvar1, L_185_forvar2 in ipairs(L_183_) do
+							if L_185_forvar2 ~= L_182_ then
+								local L_186_ = L_185_forvar2.Character and L_185_forvar2.Character:FindFirstChild("HumanoidRootPart")
+								if L_186_ then
+									local L_187_ = CFrame.new(L_186_.Position)
+									L_181_.PlaceTrap:InvokeServer(L_187_)
+								end
+							end
+						end
+					end
+				end)
+				if not L_178_ then
+					warn("An error occurred:", L_179_) -- Print the error message
+				end
+			until not L_17_.AutoTrap.Value or not L_8_.Connected
+		end
+	end
+})
+
+local L_33_ = L_19_.Trap:AddToggle("AutoDestroy", {
+	Title = "Auto Destroy Traps",
+	Default = false,
+	Callback = function(L_188_arg1)
+		if L_188_arg1 then 
+			L_14_:Notify({
+				Title = 'Destroy Traps',
+				Content = 'This will delete traps visually [less lag]',
+				Duration = 5
+			})
+
+			repeat
+				task.wait()
+				local L_189_, L_190_ = pcall(function()
+					local L_191_ = workspace:FindFirstChild(L_11_.Name)
+
+					if L_191_ and L_191_:IsA("Model") then
+						for L_192_forvar1, L_193_forvar2 in pairs(L_191_:GetDescendants()) do
+							if L_193_forvar2.Name == "Trap" then
+								L_193_forvar2:Destroy()
+							end
+						end
+					end 
+				end)
+			until not L_17_.AutoDestroy.Value or not L_8_.Connected
+		end
+	end
+})
+
+
+local function L_34_func(L_194_arg1)
+	local L_195_ = L_10_.Character and L_10_.Character:FindFirstChild("Humanoid")
+	if L_195_ then
+		L_195_.WalkSpeed = L_194_arg1
+	end
+end
+
+local L_35_ = L_19_.Player:AddToggle("WalkSpeed", {
+	Title = "Walkspeed",
+	Default = false,
+	Callback = function(L_196_arg1)
+		if L_196_arg1 then 
+			repeat
+				task.wait()  
+				L_34_func(L_17_.Walk.Value)  
+			until not L_17_.WalkSpeed.Value or not L_8_.Connected
+			L_34_func(16)
+		end
+	end
+})
+
+local L_36_ = L_19_.Player:AddSlider("Walk", {
 	Title = "Walk Speed",
 	Default = 16,
 	Min = 16,
 	Max = 200,
 	Rounding = 0,
-	Callback = function(L_161_arg1)
+	Callback = function(L_197_arg1)
 	end
 })
 
-local function L_34_func(L_162_arg1)
-	local L_163_ = L_10_.Character and L_10_.Character:FindFirstChild("Humanoid")
-	if L_163_ then
-		L_163_.JumpPower = L_162_arg1
+local function L_37_func(L_198_arg1)
+	local L_199_ = L_10_.Character and L_10_.Character:FindFirstChild("Humanoid")
+	if L_199_ then
+		L_199_.JumpPower = L_198_arg1
 	end
 end
 
-local L_35_ = L_19_.Player:AddToggle("JumpPower", {
+local L_38_ = L_19_.Player:AddToggle("JumpPower", {
 	Title = "Jump Power",
 	Default = false,
-	Callback = function(L_164_arg1)
-		if L_164_arg1 then 
+	Callback = function(L_200_arg1)
+		if L_200_arg1 then 
 			repeat
 				task.wait()  
-				L_34_func(L_17_.Jump.Value)  
+				L_37_func(L_17_.Jump.Value)  
 			until not L_17_.JumpPower.Value or not L_8_.Connected
-			L_34_func(50)
+			L_37_func(50)
 		end
 	end
 })
 
-local L_36_ = L_19_.Player:AddSlider("Jump", {
+local L_39_ = L_19_.Player:AddSlider("Jump", {
 	Title = "Jump Power",
 	Default = 50,
 	Min = 50,
 	Max = 200,
 	Rounding = 1,
-	Callback = function(L_165_arg1)
+	Callback = function(L_201_arg1)
 	end
 })
-local L_37_
 
-local L_38_ = L_19_.Player:AddToggle("InfiniteJump", {
+local L_40_
+
+local L_41_ = L_19_.Player:AddToggle("InfiniteJump", {
 	Title = "Infinite Jump",
 	Default = false,
-	Callback = function(L_166_arg1)
-		if L_166_arg1 then 
-			L_37_ = L_6_.JumpRequest:Connect(function()
+	Callback = function(L_202_arg1)
+		if L_202_arg1 then 
+			L_40_ = L_6_.JumpRequest:Connect(function()
 				L_11_.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)  
 			end)
 			repeat
 				task.wait()
 			until not L_17_.InfiniteJump.Value or not L_8_.Connected
-			L_37_:Disconnect()
+			L_40_:Disconnect()
 		end
 	end 
 })
@@ -677,13 +807,13 @@ L_19_.Emotes:AddButton({
 	end
 })
 
-local L_39_ = L_19_.Settings:AddToggle("Settings", {
+local L_42_ = L_19_.Settings:AddToggle("Settings", {
 	Title = "Save Settings",
 	Default = false,
-	Callback = function(L_167_arg1)
-		if L_167_arg1 then 
+	Callback = function(L_203_arg1)
+		if L_203_arg1 then 
 			repeat
-				task.wait(.5)  
+				task.wait(.1)  
 				L_15_:Save(game.PlaceId)
 			until not L_17_.Settings.Value or not L_8_.Connected
 		end
@@ -697,11 +827,11 @@ L_19_.Settings:AddButton({
 	end  
 })  
 
-local L_40_ = L_19_.Server:AddToggle("AutoRejoin", {
+local L_43_ = L_19_.Server:AddToggle("AutoRejoin", {
 	Title = "Auto Rejoin",
 	Default = false,
-	Callback = function(L_168_arg1)
-		if L_168_arg1 then 
+	Callback = function(L_204_arg1)
+		if L_204_arg1 then 
 			L_14_:Notify({
 				Title = 'Auto Rejoin',
 				Content = 'You will rejoin if you are kicked or disconnected from the game',
@@ -709,10 +839,10 @@ local L_40_ = L_19_.Server:AddToggle("AutoRejoin", {
 			})
 			repeat
 				task.wait() 
-				local L_169_, L_170_, L_171_ = game:GetService('Players').LocalPlayer, game.CoreGui.RobloxPromptGui.promptOverlay, game:GetService('TeleportService')
-				L_170_.ChildAdded:connect(function(L_172_arg1)
-					if L_172_arg1.Name == 'ErrorPrompt' then
-						L_171_:Teleport(game.PlaceId)
+				local L_205_, L_206_, L_207_ = game:GetService('Players').LocalPlayer, game.CoreGui.RobloxPromptGui.promptOverlay, game:GetService('TeleportService')
+				L_206_.ChildAdded:connect(function(L_208_arg1)
+					if L_208_arg1.Name == 'ErrorPrompt' then
+						L_207_:Teleport(game.PlaceId)
 						task.wait(2)
 					end
 				end)
@@ -721,16 +851,16 @@ local L_40_ = L_19_.Server:AddToggle("AutoRejoin", {
 	end
 })
 
-local L_41_ = L_19_.Server:AddToggle("ReExecute", {
+local L_44_ = L_19_.Server:AddToggle("ReExecute", {
 	Title = "Auto ReExecute",
 	Default = false,
-	Callback = function(L_173_arg1)
-		if L_173_arg1 then 
+	Callback = function(L_209_arg1)
+		if L_209_arg1 then 
 			repeat
 				task.wait()
-				local L_174_ = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
-				if L_174_ then
-					L_174_('loadstring(game:HttpGet("https://raw.githubusercontent.com/13B8B/nexus/main/loadstring"))()')
+				local L_210_ = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+				if L_210_ then
+					L_210_('loadstring(game:HttpGet("https://raw.githubusercontent.com/13B8B/nexus/main/loadstring"))()')
 				end  
 			until not L_17_.ReExecute.Value or not L_8_.Connected
 		end
@@ -745,46 +875,46 @@ L_19_.Server:AddButton({
 L_19_.Server:AddButton({
 	Title = "Server-Hop", 
 	Callback = function()
-		local L_175_ = game:GetService("HttpService")
-		local L_176_ = game:GetService("TeleportService")
-		local L_177_ = "https://games.roblox.com/v1/games/"
-		local L_178_, L_179_ = game.PlaceId, game.JobId
-		local L_180_ = L_177_..L_178_.."/servers/Public?sortOrder=Desc&limit=100"
-		local function L_181_func(L_183_arg1)
-			local L_184_ = game:HttpGet(L_180_..((L_183_arg1 and "&cursor="..L_183_arg1) or ""))
-			return L_175_:JSONDecode(L_184_)
+		local L_211_ = game:GetService("HttpService")
+		local L_212_ = game:GetService("TeleportService")
+		local L_213_ = "https://games.roblox.com/v1/games/"
+		local L_214_, L_215_ = game.PlaceId, game.JobId
+		local L_216_ = L_213_..L_214_.."/servers/Public?sortOrder=Desc&limit=100"
+		local function L_217_func(L_219_arg1)
+			local L_220_ = game:HttpGet(L_216_..((L_219_arg1 and "&cursor="..L_219_arg1) or ""))
+			return L_211_:JSONDecode(L_220_)
 		end
-		local L_182_;
+		local L_218_;
 		repeat
-			local L_185_ = L_181_func(L_182_)
-			for L_186_forvar1, L_187_forvar2 in next, L_185_.data do
-				if L_187_forvar2.playing < L_187_forvar2.maxPlayers and L_187_forvar2.id ~= L_179_ then
-					local L_188_, L_189_ = pcall(L_176_.TeleportToPlaceInstance, L_176_, L_178_, L_187_forvar2.id, Player)
-					if L_188_ then
+			local L_221_ = L_217_func(L_218_)
+			for L_222_forvar1, L_223_forvar2 in next, L_221_.data do
+				if L_223_forvar2.playing < L_223_forvar2.maxPlayers and L_223_forvar2.id ~= L_215_ then
+					local L_224_, L_225_ = pcall(L_212_.TeleportToPlaceInstance, L_212_, L_214_, L_223_forvar2.id, Player)
+					if L_224_ then
 						break
 					end
 				end
 			end
-			L_182_ = L_185_.nextPageCursor
-		until not L_182_
+			L_218_ = L_221_.nextPageCursor
+		until not L_218_
 	end
 })
 
-local L_42_, L_43_, L_44_ = nil, nil, false
+local L_45_, L_46_, L_47_ = nil, nil, false
 
 function GetMurderer()
-	for L_190_forvar1, L_191_forvar2 in pairs(L_3_:GetChildren()) do 
-		if L_191_forvar2.Backpack:FindFirstChild("Knife") or L_191_forvar2.Character:FindFirstChild("Knife") then
-			return L_191_forvar2.Name
+	for L_226_forvar1, L_227_forvar2 in pairs(L_3_:GetChildren()) do 
+		if L_227_forvar2.Backpack:FindFirstChild("Knife") or L_227_forvar2.Character:FindFirstChild("Knife") then
+			return L_227_forvar2.Name
 		end
 	end
 	return nil 
 end
 
 function GetSheriff()
-	for L_192_forvar1, L_193_forvar2 in pairs(L_3_:GetChildren()) do 
-		if L_193_forvar2.Backpack:FindFirstChild("Gun") or (L_193_forvar2.Character and L_193_forvar2.Character:FindFirstChild("Gun")) and L_193_forvar2.Name == "Tool" then
-			return L_193_forvar2.Name
+	for L_228_forvar1, L_229_forvar2 in pairs(L_3_:GetChildren()) do 
+		if L_229_forvar2.Backpack:FindFirstChild("Gun") or (L_229_forvar2.Character and L_229_forvar2.Character:FindFirstChild("Gun")) and L_229_forvar2.Name == "Tool" then
+			return L_229_forvar2.Name
 		end
 	end
 	return nil
@@ -793,60 +923,60 @@ end
 coroutine.wrap(function()
 	while true do
 		task.wait(.5)
-		local L_194_, L_195_ = pcall(function()
-			L_42_ = GetMurderer()
-			L_43_ = GetSheriff()
-			if L_42_ then
+		local L_230_, L_231_ = pcall(function()
+			L_45_ = GetMurderer()
+			L_46_ = GetSheriff()
+			if L_45_ then
 			end
 		end)
 	end
 end)()
 
-local L_45_
-L_45_ = hookmetamethod(game, "__namecall", function(L_196_arg1, ...)
-	local L_197_ = getnamecallmethod()
-	local L_198_ = {
+local L_48_
+L_48_ = hookmetamethod(game, "__namecall", function(L_232_arg1, ...)
+	local L_233_ = getnamecallmethod()
+	local L_234_ = {
 		...
 	}
 	if not checkcaller() then
-		if typeof(L_196_arg1) == "Instance" then
-			if L_196_arg1.Name == "ShootGun" and L_197_ == "InvokeServer" then
+		if typeof(L_232_arg1) == "Instance" then
+			if L_232_arg1.Name == "ShootGun" and L_233_ == "InvokeServer" then
 				if L_17_.SilentAim.Value or L_17_.KillMurder.Value or L_17_.SilentAim.Value and L_17_.KillMurder.Value then 
-					if L_42_ then
-						local L_199_ = workspace[tostring(L_42_)].HumanoidRootPart;
-						local L_200_ = L_199_.AssemblyLinearVelocity;
-						local L_201_ = L_199_.Position 
-						L_198_[2] = L_201_;
+					if L_45_ then
+						local L_235_ = workspace[tostring(L_45_)].HumanoidRootPart;
+						local L_236_ = L_235_.AssemblyLinearVelocity;
+						local L_237_ = L_235_.Position 
+						L_234_[2] = L_237_;
 					end;
 				else
-					return L_45_(L_196_arg1, unpack(L_198_));
+					return L_48_(L_232_arg1, unpack(L_234_));
 				end;
 			end;
 		end;
 	end;
-	return L_45_(L_196_arg1, unpack(L_198_));
+	return L_48_(L_232_arg1, unpack(L_234_));
 end);
 
-local L_46_
-L_46_ = hookmetamethod(game, "__namecall", function(L_202_arg1, ...)
-	local L_203_ = getnamecallmethod()
-	local L_204_ = {
+local L_49_
+L_49_ = hookmetamethod(game, "__namecall", function(L_238_arg1, ...)
+	local L_239_ = getnamecallmethod()
+	local L_240_ = {
 		...
 	}
 	if not checkcaller() then
-		if tostring(L_203_) == "InvokeServer" and tostring(L_202_arg1) == "GetChance" then
+		if tostring(L_239_) == "InvokeServer" and tostring(L_238_arg1) == "GetChance" then
 			wait(13)
-			local L_205_, L_206_ = pcall(function()
-				L_42_ = GetMurderer()
-				L_43_ = GetSheriff()
+			local L_241_, L_242_ = pcall(function()
+				L_45_ = GetMurderer()
+				L_46_ = GetSheriff()
 			end)
-			if not L_205_ then
-				warn("Error: "..L_206_)
+			if not L_241_ then
+				warn("Error: "..L_242_)
 			end
-			L_44_ = true
+			L_47_ = true
 		end
 	end
-	return L_46_(L_202_arg1, unpack(L_204_))
+	return L_49_(L_238_arg1, unpack(L_240_))
 end)
 
 -- Set libraries and folders
