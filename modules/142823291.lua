@@ -38,6 +38,7 @@ spawn(function()
 			wait(1)
 			L_8_:Disconnect()
 			getgenv().Disconnect = false
+                        getgenv().nexus = false
 			return
 		else  
 			L_7_:Fire()  
