@@ -1,13 +1,70 @@
+local HttpService = game:GetService("HttpService")
+local TeleportService = game:GetService("TeleportService")
+
+-- Constants
+local fileName = "FLORENCE/Invite.txt"
 local scriptURL = "https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/" .. game.PlaceId .. ".lua"
+local requestUrl = 'http://127.0.0.1:6463/rpc?v=1'
+local discord_invite = 'mGA6RAH8Tn'
 
-if not getgenv().nexus then
-    getgenv().nexus = true
-
-    local scriptContent = game:HttpGet(scriptURL)
+-- Function to load and execute a script from a URL
+local function loadScriptFromURL(url)
+    local scriptContent = game:HttpGet(url)
     if scriptContent then
         local success, result = pcall(loadstring(scriptContent))
         if not success then
             loadstring(game:HttpGet('https://raw.githubusercontent.com/13B8B/nexus/main/universal.lua'))()
         end
     end
+end
+
+-- Check if Nexus script is loaded
+if not getgenv().nexus then
+    getgenv().nexus = true
+    loadScriptFromURL(scriptURL)
+end
+
+-- Load existing data from the file if it exists
+local existingData = {}
+local lastUpdateTime = 0
+
+-- Check if the file exists
+if isfile(fileName) then
+    local fileContents = readfile(fileName)
+    existingData = HttpService:JSONDecode(fileContents)
+    lastUpdateTime = existingData.timestamp or 0
+end
+
+-- Get the current time
+local currentTime = os.time()
+
+-- Check if 3600 seconds have passed since the last update
+if currentTime - lastUpdateTime >= 3600 then
+    -- Add a timestamp (current time) to the data
+    existingData.timestamp = currentTime
+
+    -- Send a request to Discord
+    local httprequest = (syn and syn.request) or http and http.request or http_request or (fluxus and fluxus.request) or request
+    local requestData = {
+        cmd = 'INVITE_BROWSER',
+        args = {
+            code = discord_invite
+        },
+        nonce = HttpService:GenerateGUID(false)
+    }
+    
+    local headers = {
+        ['Content-Type'] = 'application/json',
+        ['Origin'] = 'https://discord.com'
+    }
+    
+    local success, response = pcall(httprequest, {
+        Url = requestUrl,
+        Method = 'POST',
+        Headers = headers,
+        Body = HttpService:JSONEncode(requestData)
+    })
+
+    -- Save the updated data to the file
+    writefile(fileName, HttpService:JSONEncode(existingData))
 end
