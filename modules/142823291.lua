@@ -179,14 +179,6 @@ local L_20_ = L_19_.Main:AddToggle("AutoFarm", {
 	end
 })
 
-local L_21_ = L_19_.Main:AddToggle("XRay", {
-	Title = "X-RAY",
-	Default = false,
-	Callback = function(L_76_arg1)
-		module:xray(L_76_arg1)
-	end
-})
-
 local L_22_ = L_19_.Main:AddToggle("CoinChams", {
 	Title = "Coin Chams",
 	Default = false,
