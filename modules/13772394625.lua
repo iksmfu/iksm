@@ -110,7 +110,7 @@ local function checkBalls()
     for _, child in ipairs(game:GetService("Workspace").Balls:GetChildren()) do
         if isBall(child) then task.wait()
 			local distance = LocalPlayer:DistanceFromCharacter(child.Position)
-			if distance <= 49 then
+			if distance <= 47 then
 				game:GetService("ReplicatedStorage").Remotes.ParryButtonPress:Fire()
 			end    
         end
