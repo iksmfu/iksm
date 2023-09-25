@@ -52,7 +52,7 @@ end
 
 spawn(function()
     while wait() do
-       if getgenv().Disconnect == true then wait(1)
+       if getgenv().Disconnect == true then
            connection:Disconnect()
 		    getgenv().Disconnect = false
             getgenv().nexus = false
@@ -116,6 +116,18 @@ local function checkBalls()
         end
     end
 end
+
+local Toggle = Tabs.Main:AddToggle("AutoFarm", {
+    Title = "Auto Farm",
+	Default = false,
+    Callback = function(value)
+		if value then 
+			repeat task.wait()  
+                for _,_ in next,workspace.Balls:GetChildren()do if _ then if game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character and game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character:FindFirstChild("\x48\x75\x6D\x61\x6E\x6F\x69\x64\x52\x6F\x6F\x74\x50\x61\x72\x74")then if game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character:FindFirstChild("\x48\x69\x67\x68\x6C\x69\x67\x68\x74")then game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character.HumanoidRootPart.Position,_.Position) game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character.HumanoidRootPart.CFrame=_.CFrame*CFrame.new(0,0,(_.Velocity).Magnitude*-0.5) game:GetService("\x52\x65\x70\x6C\x69\x63\x61\x74\x65\x64\x53\x74\x6F\x72\x61\x67\x65").Remotes.ParryButtonPress:Fire()end end end end
+			until not Options.AutoFarm.Value or not connection.Connected
+		end
+	end
+})
 
 local Toggle = Tabs.Main:AddToggle("AutoParry", {
     Title = "Auto Parry",
