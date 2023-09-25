@@ -209,15 +209,15 @@ local Toggle = Tabs.Player:AddToggle("WalkSpeed", {
             repeat task.wait()  
                 setWalkSpeed(Options.Walk.Value)  
             until not Options.WalkSpeed.Value or not connection.Connected
-            setWalkSpeed(16)
+            setWalkSpeed(36)
         end
     end
 })
 
 local Slider = Tabs.Player:AddSlider("Walk", {
     Title = "Walk Speed",
-    Default = 16,
-    Min = 16,
+    Default = 36,
+    Min = 36,
     Max = 200,
     Rounding = 0,
     Callback = function(Value)
@@ -227,7 +227,7 @@ local Slider = Tabs.Player:AddSlider("Walk", {
 local function setJumpPower(jumpPower)
     local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid")
     if humanoid then
-        humanoid.JumpPower = jumpPower
+        humanoid.JumpHeight = jumpPower
     end
 end
  
@@ -239,35 +239,21 @@ local Toggle = Tabs.Player:AddToggle("JumpPower", {
         repeat task.wait()  
             setJumpPower(Options.Jump.Value)  
         until not Options.JumpPower.Value or not connection.Connected
-        setJumpPower(50)
+        setJumpPower(10)
     end
    end
 })
 
 local Slider = Tabs.Player:AddSlider("Jump", {
     Title = "Jump Power",
-    Default = 50,
-    Min = 50,
-    Max = 200,
-    Rounding = 1,
+    Default = 10,
+    Min = 10,
+    Max = 100,
+    Rounding = 0,
     Callback = function(Value)
     end
 })
-local infJumpConnection
 
-local Toggle = Tabs.Player:AddToggle("InfiniteJump", {
-    Title = "Infinite Jump",
-    Default = false,
-    Callback = function(value)
-        if value then 
-            infJumpConnection = UserInputService.JumpRequest:Connect(function()
-                localPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)  
-            end)
-            repeat task.wait() until not Options.InfiniteJump.Value or not connection.Connected
-            infJumpConnection:Disconnect()
-        end
-    end 
-})
 
 
 Tabs.Settings:AddButton({
