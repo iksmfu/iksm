@@ -114,9 +114,7 @@ local function checkBalls()
 
 			local distance = LocalPlayer:DistanceFromCharacter(child.Position)
 			if distance <= 45 then
-				--game:GetService("ReplicatedStorage").Remotes.ParryButtonPress:Fire()
-                game:GetService("VirtualInputManager"):SendKeyEvent(true, "F", false, nil)
-                game:GetService("VirtualInputManager"):SendKeyEvent(false, "F", false, nil)
+				game:GetService("ReplicatedStorage").Remotes.ParryButtonPress:Fire()
 			end    
         end
     end
