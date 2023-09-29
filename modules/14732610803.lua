@@ -102,6 +102,7 @@ local Tabs = {
     }),
 }
 
+
 local function isBall(child)
     return child:IsA("Part") and string.find(child.BrickColor.Name:lower(), "red")
 end
@@ -110,7 +111,7 @@ local function checkBalls()
     for _, child in ipairs(game:GetService("Workspace").Balls:GetChildren()) do
         if isBall(child) then task.wait()
 			local distance = LocalPlayer:DistanceFromCharacter(child.Position)
-			if distance <= 48 then
+			if distance <= 46 then
 				game:GetService("ReplicatedStorage").Remotes.ParryButtonPress:Fire()
 			end    
         end
@@ -123,8 +124,28 @@ local Toggle = Tabs.Main:AddToggle("AutoFarm", {
     Callback = function(value)
 		if value then 
 			repeat task.wait()  
-                for _,_ in next,workspace.Balls:GetChildren()do if _ then if game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character and game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character:FindFirstChild("\x48\x75\x6D\x61\x6E\x6F\x69\x64\x52\x6F\x6F\x74\x50\x61\x72\x74")then if game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character:FindFirstChild("\x48\x69\x67\x68\x6C\x69\x67\x68\x74")then game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character.HumanoidRootPart.Position,_.Position) game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character.HumanoidRootPart.CFrame=_.CFrame*CFrame.new(0,0,(_.Velocity).Magnitude*-0.5) game:GetService("\x52\x65\x70\x6C\x69\x63\x61\x74\x65\x64\x53\x74\x6F\x72\x61\x67\x65").Remotes.ParryButtonPress:Fire()end end end end
-			until not Options.AutoFarm.Value or not connection.Connected
+                local success, result = pcall(function() 
+                    for _,_ in next,workspace.Balls:GetChildren()do if _ then if game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character:FindFirstChild("\x48\x69\x67\x68\x6C\x69\x67\x68\x74")and not game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.PlayerGui.Packs.HUD.UltimateBlade.Visible then game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character.HumanoidRootPart.CFrame=_.CFrame+Vector3.new(0,-10,0) game:GetService("\x52\x65\x70\x6C\x69\x63\x61\x74\x65\x64\x53\x74\x6F\x72\x61\x67\x65").Remotes.ParryButtonPress:Fire()elseif game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character and game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character:FindFirstChild("\x48\x75\x6D\x61\x6E\x6F\x69\x64\x52\x6F\x6F\x74\x50\x61\x72\x74")and not game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.PlayerGui.Packs.HUD.UltimateBlade.Visible then game:GetService("\x50\x6C\x61\x79\x65\x72\x73").LocalPlayer.Character.HumanoidRootPart.CFrame=_.CFrame+Vector3.new(0,-12,0)end end end
+                end)  
+            until not Options.AutoFarm.Value or not connection.Connected
+		end
+	end
+})
+
+local Toggle = Tabs.Main:AddToggle("AutoLook", {
+    Title = "Auto Look At Ball",
+	Default = false,
+    Callback = function(value)
+		if value then 
+			repeat task.wait()  
+                local success, result = pcall(function() 
+                    for _,ball in next, workspace.Balls:GetChildren() do
+                        if ball then
+                            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, ball.Position)
+                        end  
+                    end   
+                end)  
+            until not Options.AutoLook.Value or not connection.Connected
 		end
 	end
 })
