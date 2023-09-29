@@ -113,7 +113,7 @@ local function checkBalls()
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, child.Position)
 
 			local distance = LocalPlayer:DistanceFromCharacter(child.Position)
-			if distance <= 46 then
+			if distance <= 45 then
 				--game:GetService("ReplicatedStorage").Remotes.ParryButtonPress:Fire()
                 game:GetService("VirtualInputManager"):SendKeyEvent(true, "F", false, nil)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false, "F", false, nil)
