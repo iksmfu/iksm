@@ -326,14 +326,6 @@ local Tabs = {
         Icon = "rbxassetid://10734950020"
     }),
 }
-local Dropdownnn = Tabs.Main:AddDropdown("SelectedWorld", {
-    Title = "Select World",
-    Values = {"Normal World", "Hardcore World", "Heaven World"},
-    Multi = false,
-    Default = false,
-    Callback = function(value)
-    end
-})
 
 local Toggle = Tabs.Main:AddToggle("FN", {
     Title = "Auto Farm",
@@ -357,6 +349,15 @@ local Toggle = Tabs.Main:AddToggle("FN", {
 			until not Options.FN.Value or not connection.Connected
 		end
 	end
+})
+
+local Dropdownnn = Tabs.Main:AddDropdown("SelectedWorld", {
+    Title = "Select World",
+    Values = {"Normal World", "Hardcore World", "Heaven World"},
+    Multi = false,
+    Default = false,
+    Callback = function(value)
+    end
 })
 
 local Toggle = Tabs.Main:AddToggle("FarmBoss", {
