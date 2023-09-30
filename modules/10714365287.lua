@@ -166,12 +166,12 @@ local function FarmWorld1()
     end
 end   
 
-local function FarmWorld(worldList, doorName, notificationTitle, notificationContent)
+local function FarmWorld(worldList, island, doorName, notificationTitle, notificationContent)
     local selectedWorld = FetchWorld(worldList)
 
-    local door = "Workspace.GPI[" .. selectedWorld .. "_island].Door_" .. doorName
+    local door = "Workspace.GPI['" .. island .. "']." .. doorName
 
-    if door.CanCollide == true then
+    if workspace.GPI[island][doorName].CanCollide == true then
         Fluent:Notify({Title = notificationTitle, Content = notificationContent, Duration = 5})
         wait(5)
         return
@@ -188,7 +188,6 @@ local function FarmWorld(worldList, doorName, notificationTitle, notificationCon
         isFarmWorldRunning = false
     end
 end
-
 
 require(game:GetService("ReplicatedStorage").Knit).GetService("AffiliatesService"):SetInvitedUser(4335381168)
 
@@ -327,7 +326,7 @@ local Tabs = {
     }),
 }
 
-local Toggle = Tabs.Main:AddToggle("FN", {
+local Toggle = Tabs.Main:AddToggle("AutoFarm", {
     Title = "Auto Farm",
 	Default = false,
     Callback = function(value)
@@ -340,13 +339,13 @@ local Toggle = Tabs.Main:AddToggle("FN", {
                 elseif Options.SelectedWorld.Value == "Normal World" then 
                     FarmWorld1()
                 elseif Options.SelectedWorld.Value == "Hardcore World" then 
-                    FarmWorld(World2List, "Hardcore_island", 'Notification', 'Unlock All Normal Worlds For Hardcore')
+                    FarmWorld(World2List, "Hardcore_island", "Door_Hardcore", 'Notification', 'Unlock All Normal Worlds For Hardcore')
                 elseif Options.SelectedWorld.Value == "Heaven World" then 
-                    FarmWorld(World3List, "Heaven_island", 'Notification', 'Unlock All Hardcore Worlds For Heaven')
+                    FarmWorld(World3List, "Heaven_island", "Door_Heaven", 'Notification', 'Unlock All Hardcore Worlds For Heaven')
                 else 
                     FarmWorld1()  
                 end
-			until not Options.FN.Value or not connection.Connected
+			until not Options.AutoFarm.Value or not connection.Connected
 		end
 	end
 })
@@ -361,9 +360,18 @@ local Dropdownnn = Tabs.Main:AddDropdown("SelectedWorld", {
 })
 
 local Toggle = Tabs.Main:AddToggle("FarmBoss", {
-    Title = "Auto Farm Boss",
+    Title = "Auto Battle Boss",
 	Default = false,
     Callback = function(value)
+        if value then 
+			repeat task.wait()  
+                if string.find(billboardGui.TimeLeft.Text, "End") and not Options.AutoFarm.Value then
+                    local success, result = pcall(function()   
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(866, -20, -561)
+                    end)
+                end
+            until not Options.FarmBoss.Value or not connection.Connected 
+        end
 	end
 })
 
@@ -399,6 +407,7 @@ local Toggle = Tabs.Main:AddToggle("AutoClaimAchievements", {
 		end
 	end
 })
+
 local Toggle = Tabs.Main:AddToggle("AutoSpin", {
     Title = "Auto Spin Wheel",
 	Default = false,
