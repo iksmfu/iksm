@@ -36,30 +36,68 @@ local World3List = {
     "World+16", "World+17", "World+18", "World+19", "World+20"
 }
 
--- Define a function to fetch the current world from a given list
+local function FetchWorld1()
+    local world = nil
+    for i, worldName in ipairs(World1List) do
+        local currentWorld = workspaceGPI:FindFirstChild(worldName)
+        if currentWorld and currentWorld:FindFirstChild("EntranceGUI") then
+            world = currentWorld.Name
+            break
+        end
+    end
+    if not world then
+        local currentIndex = #World1List
+        while currentIndex > 0 do
+            local currentWorld = World1List[currentIndex]
+            local worldExists = workspaceGPI:FindFirstChild(currentWorld)
+            if worldExists then
+                world = currentWorld
+                break
+            else
+                currentIndex = currentIndex - 1
+            end
+        end
+        if currentIndex == 0 then
+            world = nil
+        end
+    else
+        local currentIndex = table.find(World1List, world)
+        if currentIndex and currentIndex > 1 then
+            world = World1List[currentIndex - 1]
+        end
+    end
+    return world
+end
+
 local function FetchWorld(worldList)
     local world = nil
-
-    -- Iterate through the world names in the list
     for i, worldName in ipairs(worldList) do
         local currentWorld = workspaceGPI:FindFirstChild(worldName)
-        
-        -- Check if the world exists and has an "EntranceGUI"
         if currentWorld and currentWorld:FindFirstChild("EntranceGUI") then
             world = currentWorld.Name
             break
         end
     end
 
-    -- If a valid world is not found, search again in reverse order
     if not world then
-        for currentIndex = #worldList, 1, -1 do
+        local currentIndex = #worldList
+        while currentIndex > 0 do
             local currentWorld = worldList[currentIndex]
             local worldExists = workspaceGPI:FindFirstChild(currentWorld)
             if worldExists then
                 world = currentWorld
                 break
+            else
+                currentIndex = currentIndex - 1
             end
+        end
+        if currentIndex == 0 then
+            world = nil
+        end
+    else
+        local currentIndex = table.find(worldList, world)
+        if currentIndex and currentIndex > 1 then
+            world = worldList[currentIndex]
         end
     end
 
@@ -113,34 +151,44 @@ spawn(function()
 		end
 	end  
 end)  
-
 local isFarmWorldRunning = false 
 
-local function FarmWorld(worldList, doorName, notificationTitle, notificationContent)
-
-    local selectedWorld = FetchWorld(worldList)
-    
-    local doorPath = "Workspace.GPI[" .. selectedWorld .. "_island].Door_" .. doorName
-    local door = game:GetService("Workspace"):FindFirstChild(doorPath)
-    
-    if door and door.CanCollide and doorName ~= "skip" then
-        Fluent:Notify({ Title = notificationTitle, Content = notificationContent, Duration = 5 })
-        wait(5)
-    elseif not isFarmWorldRunning and not workspace.GPI.World1.StartBlock.CanCollide then 
+local function FarmWorld1()
+    local SelectedWorld1 = FetchWorld1()
+    local spawnPosition = workspaceGPI[SelectedWorld1].SpawnLocation.Position
+    if not isFarmWorldRunning and workspace.GPI.World1.StartBlock.CanCollide == false then 
         isFarmWorldRunning = true -- Set the flag to indicate that the function is running
+        moveToPosition(spawnPosition, 0)
+        wait(1)
+        moveToPosition(spawnPosition + Vector3.new(0, 4, 780400), math.random(16, 22))
+        wait(6)
+        isFarmWorldRunning = false -- Set the flag to indicate that the function is running
+    end
+end   
 
-        local spawnPosition = workspace.GPI[selectedWorld].SpawnLocation.Position
-        local startBlock = workspace.GPI.World1.StartBlock
+local function FarmWorld(worldList, doorName, notificationTitle, notificationContent)
+    local selectedWorld = FetchWorld(worldList)
 
-        if startBlock and not startBlock.CanCollide then
-            moveToPosition(spawnPosition, 0)
-            wait(1)
-            moveToPosition(spawnPosition + Vector3.new(0, 3, 780400), math.random(16, 22))
-            wait(5)
-            isFarmWorldRunning = false
-        end 
+    local door = "Workspace.GPI[" .. selectedWorld .. "_island].Door_" .. doorName
+
+    if door.CanCollide == true then
+        Fluent:Notify({Title = notificationTitle, Content = notificationContent, Duration = 5})
+        wait(5)
+        return
+    end
+
+    local spawnPosition = workspace.GPI[selectedWorld].SpawnLocation.Position
+
+    if not isFarmWorldRunning and workspace.GPI.World1.StartBlock.CanCollide == false then
+        isFarmWorldRunning = true
+        moveToPosition(spawnPosition, 0)
+        wait(1)
+        moveToPosition(spawnPosition + Vector3.new(0, 3, 780400), math.random(16, 22))
+        wait(5)
+        isFarmWorldRunning = false
     end
 end
+
 
 require(game:GetService("ReplicatedStorage").Knit).GetService("AffiliatesService"):SetInvitedUser(4335381168)
 
@@ -278,8 +326,16 @@ local Tabs = {
         Icon = "rbxassetid://10734950020"
     }),
 }
+local Dropdownnn = Tabs.Main:AddDropdown("SelectedWorld", {
+    Title = "Select World",
+    Values = {"Normal World", "Hardcore World", "Heaven World"},
+    Multi = false,
+    Default = false,
+    Callback = function(value)
+    end
+})
 
-local Toggle = Tabs.Main:AddToggle("AutoFarm", {
+local Toggle = Tabs.Main:AddToggle("FN", {
     Title = "Auto Farm",
 	Default = false,
     Callback = function(value)
@@ -290,28 +346,18 @@ local Toggle = Tabs.Main:AddToggle("AutoFarm", {
 					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(866, -20, -561)
                     end)
                 elseif Options.SelectedWorld.Value == "Normal World" then 
-                    FarmWorld(World1List, "skip", 'Notification', 'Unlock All Normal Worlds For Hardcore')
+                    FarmWorld1()
                 elseif Options.SelectedWorld.Value == "Hardcore World" then 
-                    FarmWorld(World2List, "Hardcore", 'Notification', 'Unlock All Normal Worlds For Hardcore')
+                    FarmWorld(World2List, "Hardcore_island", 'Notification', 'Unlock All Normal Worlds For Hardcore')
                 elseif Options.SelectedWorld.Value == "Heaven World" then 
-                    FarmWorld(World3List, "Heaven", 'Notification', 'Unlock All Normal Worlds For Hardcore')
+                    FarmWorld(World3List, "Heaven_island", 'Notification', 'Unlock All Hardcore Worlds For Heaven')
                 else 
-                    FarmWorld(World1List, "Hardcore", 'Notification', 'Unlock All Normal Worlds For Hardcore')
+                    FarmWorld1()  
                 end
-			until not Options.AutoFarm.Value or not connection.Connected
+			until not Options.FN.Value or not connection.Connected
 		end
 	end
 })
-
-local Dropdown = Tabs.Main:AddDropdown("SelectedWorld", {
-    Title = "Select World",
-    Values = {"Normal World", "Hardcore World", "Heaven World"},
-    Multi = false,
-    Default = false,
-    Callback = function(value)
-    end
-})
-
 
 local Toggle = Tabs.Main:AddToggle("FarmBoss", {
     Title = "Auto Farm Boss",
