@@ -1,3 +1,28 @@
+local SlapBattleIds = {
+    7234087065,
+    9015014224,
+    9020359053,
+    9068206286,
+    9426795465,
+    9431156611,
+    11359765900,
+    11367956190,
+    11520107397,
+    11828384869,
+    12432152490,
+    12712288037,
+    12845859004,
+    13833961666,
+    14422118326
+}
+for _, placeId in ipairs(SlapBattleIds) do
+    if game.PlaceId == placeId then
+        getgenv().nexus = true
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/6403373529.lua'))()
+        return
+    end  
+end
+
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 
