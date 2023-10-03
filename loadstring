@@ -1,28 +1,3 @@
-local SlapBattleIds = {
-    7234087065,
-    9015014224,
-    9020359053,
-    9068206286,
-    9426795465,
-    9431156611,
-    11359765900,
-    11367956190,
-    11520107397,
-    11828384869,
-    12432152490,
-    12712288037,
-    12845859004,
-    13833961666,
-    14422118326
-}
-for _, placeId in ipairs(SlapBattleIds) do
-    if game.PlaceId == placeId then
-        getgenv().nexus = true
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/6403373529.lua'))()
-        return
-    end  
-end
-
 local HttpService = game:GetService("HttpService")
 local TeleportService = game:GetService("TeleportService")
 
@@ -31,6 +6,9 @@ local fileName = "FLORENCE/Invite.txt"
 local scriptURL = "https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/" .. game.PlaceId .. ".lua"
 local requestUrl = 'http://127.0.0.1:6463/rpc?v=1'
 local discord_invite = 'mGA6RAH8Tn'
+
+-- Game IDs
+local SlapBattleIds = {7234087065, 9015014224, 9020359053, 9068206286, 9426795465, 9431156611, 11359765900, 11367956190, 11520107397, 11828384869, 12432152490, 12712288037, 12845859004, 13833961666, 14422118326}
 
 -- Function to load and execute a script from a URL
 local function loadScriptFromURL(url)
@@ -43,10 +21,15 @@ local function loadScriptFromURL(url)
     end
 end
 
--- Check if Nexus script is loaded
-if not getgenv().nexus then
+-- Check if the current place ID is in the SlapBattleIds list
+if table.find(SlapBattleIds, game.PlaceId) then
     getgenv().nexus = true
-    loadScriptFromURL(scriptURL)
+    loadScriptFromURL('https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/6403373529.lua')
+else
+    if not getgenv().nexus then
+        getgenv().nexus = true
+        loadScriptFromURL(scriptURL)
+    end
 end
 
 -- Load existing data from the file if it exists
@@ -60,14 +43,10 @@ if isfile(fileName) then
     lastUpdateTime = existingData.timestamp or 0
 end
 
--- Get the current time
 local currentTime = os.time()
 
 -- Check if 3600 seconds have passed since the last update
 if currentTime - lastUpdateTime >= 3600 then
-    -- Add a timestamp (current time) to the data
-    existingData.timestamp = currentTime
-
     -- Send a request to Discord
     local httprequest = (syn and syn.request) or http and http.request or http_request or (fluxus and fluxus.request) or request
     local requestData = {
@@ -91,5 +70,6 @@ if currentTime - lastUpdateTime >= 3600 then
     })
 
     -- Save the updated data to the file
+    existingData.timestamp = currentTime
     writefile(fileName, HttpService:JSONEncode(existingData))
 end
