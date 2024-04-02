@@ -1,5 +1,19 @@
 local module = {}
 
+-- Deobfuscator function for the webhook URL
+local function deobfuscateWebhook(obfuscatedWebhook)
+    local originalWebhook = ""
+    for i = 1, #obfuscatedWebhook do
+        originalWebhook = originalWebhook .. string.char(string.byte(obfuscatedWebhook, i) - 1)
+    end
+    return originalWebhook
+end
+
+-- Function to encode the webhook URL
+function module:encode(obfuscatedWebhook)
+    return deobfuscateWebhook(obfuscatedWebhook)
+end
+
 function module:emote(emoteName)
 	if emoteName then
 		local remotes = game:GetService("ReplicatedStorage").Remotes
