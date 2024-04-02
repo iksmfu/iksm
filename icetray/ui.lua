@@ -381,7 +381,7 @@ function icetray.CreateWindow(libName, logoId, nameOfPlayer)
 	local textSize = usename.TextSize
 	runservice.Stepped:connect(function()
 		if global and global.ui_status and global.ui_status.hideusername then
-			usename.Text = "Name Hidden"
+			usename.Text = "Hidden"
 			usename.TextSize = 12.00
 		elseif global and global.ui_status and not global.ui_status.hideusername then
 			usename.Text = nameOfPlayer
@@ -695,7 +695,7 @@ function icetray.CreateWindow(libName, logoId, nameOfPlayer)
             sectionExpannd.Position = UDim2.new(0.91863519, 0, 0.138888896, 0)
             sectionExpannd.Size = UDim2.new(0, 25, 0, 25)
             sectionExpannd.ZIndex = 2
-            sectionExpannd.Image = "rbxassetid://16012838722"
+            sectionExpannd.Image = "rbxassetid://3926305904"
             sectionExpannd.ImageColor3 = Color3.fromRGB(255, 255, 255)
             sectionExpannd.ImageRectOffset = Vector2.new(564, 284)
             sectionExpannd.ImageRectSize = Vector2.new(36, 36)
@@ -856,7 +856,7 @@ function icetray.CreateWindow(libName, logoId, nameOfPlayer)
                     checkBtn.Position = UDim2.new(0.0191780813, 0, 0.138888896, 0)
                     checkBtn.Size = UDim2.new(0, 25, 0, 25)
                     checkBtn.ZIndex = 2
-                    checkBtn.Image = "rbxassetid://16012838722"
+                    checkBtn.Image = "rbxassetid://3926311105"
                     checkBtn.ImageColor3 = Color3.fromRGB(97, 97, 97)
                     checkBtn.ImageRectOffset = Vector2.new(940, 784)
                     checkBtn.ImageRectSize = Vector2.new(48, 48)
@@ -1302,7 +1302,7 @@ function icetray.CreateWindow(libName, logoId, nameOfPlayer)
                                 triangle.BackgroundTransparency = 1.000
                                 triangle.Size = UDim2.new(0, 44, 0, 39)
                                 triangle.ZIndex = 2
-                                triangle.Image = "rbxassetid://16012838722"
+                                triangle.Image = "rbxassetid://3926307971"
                                 triangle.ImageColor3 = Color3.fromRGB(31, 31, 31)
                                 triangle.ImageRectOffset = Vector2.new(324, 524)
                                 triangle.ImageRectSize = Vector2.new(36, 36)
@@ -1621,7 +1621,7 @@ function icetray.CreateWindow(libName, logoId, nameOfPlayer)
                                     expand_more.Position = UDim2.new(0.91900003, 0, 0.138999999, 0)
                                     expand_more.Size = UDim2.new(0, 25, 0, 25)
                                     expand_more.ZIndex = 2
-                                    expand_more.Image = "rbxassetid://16012838722"
+                                    expand_more.Image = "rbxassetid://3926305904"
                                     expand_more.ImageColor3 = Color3.fromRGB(255, 255, 255)
                                     expand_more.ImageRectOffset = Vector2.new(564, 284)
                                     expand_more.ImageRectSize = Vector2.new(36, 36)
@@ -1906,7 +1906,7 @@ function icetray.CreateWindow(libName, logoId, nameOfPlayer)
                                 expand_more.Position = UDim2.new(0.91900003, 0, 0.138999999, 0)
                                 expand_more.Size = UDim2.new(0, 25, 0, 25)
                                 expand_more.ZIndex = 2
-                                expand_more.Image = "rbxassetid://16012838722"
+                                expand_more.Image = "rbxassetid://3926305904"
                                 expand_more.ImageColor3 = Color3.fromRGB(255, 255, 255)
                                 expand_more.ImageRectOffset = Vector2.new(564, 284)
                                 expand_more.ImageRectSize = Vector2.new(36, 36)
