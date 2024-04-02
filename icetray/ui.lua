@@ -381,7 +381,7 @@ function icetray.CreateWindow(libName, logoId, nameOfPlayer)
 	local textSize = usename.TextSize
 	runservice.Stepped:connect(function()
 		if global and global.ui_status and global.ui_status.hideusername then
-			usename.Text = "Hidden"
+			usename.Text = "Name Hidden"
 			usename.TextSize = 12.00
 		elseif global and global.ui_status and not global.ui_status.hideusername then
 			usename.Text = nameOfPlayer
@@ -516,8 +516,18 @@ function icetray.CreateWindow(libName, logoId, nameOfPlayer)
         tabBtn.TextSize = 14.000
         tabBtn.TextXAlignment = Enum.TextXAlignment.Left
 
-        
-
+        --[[
+        tabLogo.Name = "tabLogo"
+        tabLogo.Position = UDim2.new(-0.007, 0,0.067, 0)
+        tabLogo.Parent = tabBtnFrame
+        tabLogo.BackgroundColor3 = Color3.fromRGB(21, 21, 21)
+        tabLogo.BackgroundTransparency = 1.000
+        tabLogo.BorderSizePixel = 0
+        tabLogo.Size = UDim2.new(0, 25, 0, 25)
+        tabLogo.ZIndex = 2
+        tabLogo.Image = "rbxassetid://"..tabId
+        tabLogo.ImageColor3 = Color3.fromRGB(255, 255, 255)
+        --]]
         
 
         local newPage = Instance.new("ScrollingFrame")
