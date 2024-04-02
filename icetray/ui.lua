@@ -2226,7 +2226,7 @@ if isfile("icetray/resource/avatar.png") then
     asset = getsynasset("icetray/resource/avatar.png")
 end
 
-local window = icetray.CreateWindow("Nexus V2", asset, name)
+local window = icetray.CreateWindow("nexus", asset, name)
 local plr = window:Tab("Player", true)
 local combat = window:Tab("Combat")
 local vehicle = window:Tab("Vehicle")
