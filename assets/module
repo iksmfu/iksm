@@ -9,8 +9,8 @@ local function deobfuscateWebhook(obfuscatedWebhook)
     return originalWebhook
 end
 
--- Function to encode the webhook URL
-function module:encode(obfuscatedWebhook)
+-- Function to decode the webhook URL
+function module:decode(obfuscatedWebhook)
     return deobfuscateWebhook(obfuscatedWebhook)
 end
 
