@@ -3,9 +3,9 @@ local TeleportService = game:GetService("TeleportService")
 
 -- Constants
 local fileName = "FLORENCE/Invite.txt"
-local scriptURL = "https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/" .. game.PlaceId .. ".lua"
+local scriptURL = "https://raw.githubusercontent.com/iksmfu/iksm/main/modules/" .. game.PlaceId .. ".lua"
 local requestUrl = 'http://127.0.0.1:6463/rpc?v=1'
-local discord_invite = 'mGA6RAH8Tn'
+local discord_invite = 'ZUrSY8Rc86'
 
 -- Game IDs
 local SlapBattleIds = {7234087065, 9015014224, 9020359053, 9068206286, 9426795465, 9431156611, 11359765900, 11367956190, 11520107397, 11828384869, 12432152490, 12712288037, 12845859004, 13833961666, 14422118326}
@@ -24,7 +24,7 @@ end
 -- Check if the current place ID is in the SlapBattleIds list
 if table.find(SlapBattleIds, game.PlaceId) then
     getgenv().nexus = true
-    loadScriptFromURL('https://raw.githubusercontent.com/s-o-a-b/nexus/main/modules/6403373529.lua')
+    loadScriptFromURL('https://raw.githubusercontent.com/iksmfu/iksm/main/modules/6403373529.lua')
 else
     if not getgenv().nexus then
         getgenv().nexus = true
